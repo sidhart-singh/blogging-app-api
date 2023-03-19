@@ -1,0 +1,23 @@
+[
+  {
+    "userId": 1,
+    "name": "nishant",
+    "email": "inishant@gmail.com",
+    "password": "Nishant@123",
+    "about": "django dev"
+  },
+  {
+    "userId": 2,
+    "name": "sidhart",
+    "email": "isidhart@gmail.com",
+    "password": "Sidhart@123",
+    "about": "spring dev"
+  },
+  {
+    "userId": 3,
+    "name": "prashant",
+    "email": "iprashant@gmail.com",
+    "password": "praShant@123",
+    "about": "cpp dev"
+  }
+]
