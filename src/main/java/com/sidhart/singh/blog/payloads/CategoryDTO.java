@@ -15,6 +15,6 @@ public class CategoryDTO {
     @NotEmpty(message = "Title must not be empty.")
     private String categoryTitle;
     @NotEmpty
-    @Size(max = 20, message = "Description must be greater than 20 characters.")
+    @Size(min = 20, message = "Description must be greater than 20 characters.")
     private String categoryDescription;
 }
