@@ -11,6 +11,9 @@ import com.sidhart.singh.blog.repositories.UserRepo;
 import com.sidhart.singh.blog.services.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -71,10 +74,19 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getAllPost() {
-        List<Post> postList = this.postRepo.findAll();
+    public List<PostDTO> getAllPost(Integer pageNumber, Integer pageSize) {
 
-        List<PostDTO> postDTOList = postList.stream().map(post -> this.modelMapper.map(post, PostDTO.class))
+//        Pagination:
+//        1. create a object Pageable object passing pageNumber and pageSize
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+//        2. get Page<> object from that pageable object
+        Page<Post> postPage = this.postRepo.findAll(pageable);
+
+//        3. get the list of post from the Page<> object
+        List<Post> postPageList = postPage.getContent();
+
+        List<PostDTO> postDTOList = postPageList.stream().map(post -> this.modelMapper.map(post, PostDTO.class))
                 .collect(Collectors.toList());
 
         return postDTOList;

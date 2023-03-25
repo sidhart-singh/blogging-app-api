@@ -37,12 +37,19 @@ public class PostController {
 
         return new ResponseEntity<>(postDTOList, HttpStatus.OK);
     }
+
+//    parameters passed as params :
+//    initial indexing : pageNumber - 0
+//    in Postman - params : key : value
+//    not specifying url
     @GetMapping("/posts/")
-    public ResponseEntity<List<PostDTO>> getAllPosts(){
-        List<PostDTO> postDTOList = this.postService.getAllPost();
+    public ResponseEntity<List<PostDTO>> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "1", required = false) Integer pageNumber,
+                                                     @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize){
+        List<PostDTO> postDTOList = this.postService.getAllPost(pageNumber, pageSize);
 
         return new ResponseEntity<>(postDTOList, HttpStatus.OK);
     }
+
     @GetMapping("/posts/{postId}")
     public ResponseEntity<PostDTO> getPostById(@PathVariable Integer postId){
         PostDTO postDTO = this.postService.getPostById(postId);
