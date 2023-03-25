@@ -41,12 +41,15 @@ public class PostController {
 
 //    parameters passed as params :
 //    initial indexing : pageNumber - 0
+//    values : sortDir - asc & desc
 //    in Postman - params : key : value
 //    not specifying url
     @GetMapping("/posts/")
     public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "1", required = false) Integer pageNumber,
-                                                    @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize){
-        PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize);
+                                                    @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize,
+                                                    @RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortBy,
+                                                    @RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortDir){
+        PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize, sortBy, sortDir);
 
         return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
