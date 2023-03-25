@@ -9,17 +9,17 @@ import java.util.List;
 public interface PostService {
     PostDTO createPost(PostDTO postDTO, Integer userId, Integer categoryId);
 
-    Post updatePost(PostDTO postDTO, Integer postId);
+    PostDTO updatePost(PostDTO postDTO, Integer postId);
 
     void deletePost(Integer postId);
 
-    List<Post> getAllPost();
+    List<PostDTO> getAllPost();
 
-    Post getPostById(Integer postId);
+    PostDTO getPostById(Integer postId);
 
-    List<Post> getPostsByCategory(Integer categoryId);
+    List<PostDTO> getPostsByCategory(Integer categoryId);
 
-    List<Post> getPostsByUser(Integer userId);
+    List<PostDTO> getPostsByUser(Integer userId);
 
-    List<Post> searchPosts(String keywords);
+    List<PostDTO> searchPosts(String keywords);
 }

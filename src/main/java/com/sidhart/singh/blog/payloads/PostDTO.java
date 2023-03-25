@@ -1,14 +1,22 @@
 package com.sidhart.singh.blog.payloads;
 
-import com.sidhart.singh.blog.entities.Category;
-import com.sidhart.singh.blog.entities.User;
-import com.sidhart.singh.blog.repositories.UserRepo;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class PostDTO {
+    private Integer postId;
     private String postTitle;
     private String postContent;
-    private Data postAddedDate;
-    private Category category;
-    private User user;
+    private Date postAddedDate;
+
+//    Must not user 'Category' & 'User': Instead user 'CategoryDTO' & 'UserDTO'
+//    Infinite Recursion : Category contains List<Post>
+//    CategoryDTO doesn't have any 'Post' field
+    private CategoryDTO category;
+    private UserDTO user;
 }
