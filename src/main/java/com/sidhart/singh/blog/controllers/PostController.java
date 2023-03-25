@@ -2,6 +2,7 @@ package com.sidhart.singh.blog.controllers;
 
 import com.sidhart.singh.blog.payloads.ApiResponse;
 import com.sidhart.singh.blog.payloads.PostDTO;
+import com.sidhart.singh.blog.payloads.PostResponse;
 import com.sidhart.singh.blog.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,11 +44,11 @@ public class PostController {
 //    in Postman - params : key : value
 //    not specifying url
     @GetMapping("/posts/")
-    public ResponseEntity<List<PostDTO>> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "1", required = false) Integer pageNumber,
-                                                     @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize){
-        List<PostDTO> postDTOList = this.postService.getAllPost(pageNumber, pageSize);
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "1", required = false) Integer pageNumber,
+                                                    @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize){
+        PostResponse postResponse = this.postService.getAllPost(pageNumber, pageSize);
 
-        return new ResponseEntity<>(postDTOList, HttpStatus.OK);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
 
     @GetMapping("/posts/{postId}")

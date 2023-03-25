@@ -5,6 +5,7 @@ import com.sidhart.singh.blog.entities.Post;
 import com.sidhart.singh.blog.entities.User;
 import com.sidhart.singh.blog.exceptions.ResourceNotFoundException;
 import com.sidhart.singh.blog.payloads.PostDTO;
+import com.sidhart.singh.blog.payloads.PostResponse;
 import com.sidhart.singh.blog.repositories.CategoryRepo;
 import com.sidhart.singh.blog.repositories.PostRepo;
 import com.sidhart.singh.blog.repositories.UserRepo;
@@ -74,7 +75,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getAllPost(Integer pageNumber, Integer pageSize) {
+    public PostResponse getAllPost(Integer pageNumber, Integer pageSize) {
 
 //        Pagination:
 //        1. create a object Pageable object passing pageNumber and pageSize
@@ -89,7 +90,15 @@ public class PostServiceImpl implements PostService {
         List<PostDTO> postDTOList = postPageList.stream().map(post -> this.modelMapper.map(post, PostDTO.class))
                 .collect(Collectors.toList());
 
-        return postDTOList;
+//        create a custom PageResponse object :
+//        to return additional information
+        PostResponse postResponse = new PostResponse(postDTOList,
+                                postPage.getNumber(),
+                                postPage.getSize(),
+                                postPage.getTotalElements(),
+                                postPage.getTotalPages(),
+                                postPage.isLast());
+        return postResponse;
     }
 
     @Override
