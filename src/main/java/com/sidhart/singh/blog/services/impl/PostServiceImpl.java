@@ -143,10 +143,15 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDTO> searchPosts(String keyword) {
+
+//        using custom query with searchByTitle()
+        List<Post> postList = this.postRepo.searchByTitle("%"  + keyword + "%");
+
 //        return list of posts with their title containing the required keywords
-        List<Post> postList = this.postRepo.findByPostTitleContaining(keyword);
+//        List<Post> postList = this.postRepo.findByPostTitleContaining(keyword);
         List<PostDTO> postDTOList = postList.stream().map(post -> this.modelMapper.map(post, PostDTO.class)).collect(Collectors.toList());
 
         return postDTOList;
     }
+
 }
