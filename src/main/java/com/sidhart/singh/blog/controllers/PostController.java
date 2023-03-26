@@ -61,16 +61,23 @@ public class PostController {
         return new ResponseEntity<>(postDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("posts/{postId}")
+    @DeleteMapping("/posts/{postId}")
     public ApiResponse deletePostById(@PathVariable Integer postId){
         this.postService.deletePost(postId);
         return new ApiResponse("Post is successfully deleted.", true);
     }
 
-    @PutMapping("posts/{postId}")
+    @PutMapping("/posts/{postId}")
     public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO, @PathVariable Integer postId){
         PostDTO updatedPost = this.postService.updatePost(postDTO, postId);
         return new ResponseEntity<>(updatedPost, HttpStatus.OK);
+    }
+
+    @GetMapping("/posts/search/{keywords}")
+    public ResponseEntity<List<PostDTO>> searchPostByTitle(@PathVariable String keywords){
+        List<PostDTO> postDTOListByTitle = this.postService.searchPosts(keywords);
+
+        return new ResponseEntity<>(postDTOListByTitle, HttpStatus.OK);
     }
 
 }

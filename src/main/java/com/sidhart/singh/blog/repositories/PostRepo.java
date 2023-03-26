@@ -12,4 +12,9 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
     List<Post> findByUser(User user);
 
     List<Post> findByCategory(Category category);
+
+//    custom method for search service :
+//    generates a query with 'LIKE' clause with given field :
+//    return list of posts with their title containing the required keywords
+    List<Post> findByPostTitleContaining(String keywords);
 }
